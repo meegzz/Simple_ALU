@@ -1,0 +1,25 @@
+module FAS8bits (x, yo, cin, res, co);
+input [7:0] x, yo;
+input cin;
+output [7:0] res;
+output co;
+wire [7:0] cmid;
+wire [7:0] y;
+xor d1 (y[0], cin, yo[0]);
+xor d2 (y[1], cin, yo[1]);
+xor d3 (y[2], cin, yo[2]);
+xor d4 (y[3], cin, yo[3]);
+xor d5 (y[4], cin, yo[4]);
+xor d6 (y[5], cin, yo[5]);
+xor d7 (y[6], cin, yo[6]);
+xor d8 (y[7], cin, yo[7]);
+xor cr (co , cmid[7], cin);
+FA g1 (.a(x[0]), .b(y[0]), .ci(cin), .S_D(res[0]), .Co_Bo(cmid[0]));
+FA g2 (.a(x[1]), .b(y[1]), .ci(cmid[0]), .S_D(res[1]), .Co_Bo(cmid[1]));
+FA g3 (.a(x[2]), .b(y[2]), .ci(cmid[1]), .S_D(res[2]), .Co_Bo(cmid[2]));
+FA g4 (.a(x[3]), .b(y[3]), .ci(cmid[2]), .S_D(res[3]), .Co_Bo(cmid[3]));
+FA g5 (.a(x[4]), .b(y[4]), .ci(cmid[3]), .S_D(res[4]), .Co_Bo(cmid[4]));
+FA g6 (.a(x[5]), .b(y[5]), .ci(cmid[4]), .S_D(res[5]), .Co_Bo(cmid[5]));
+FA g7 (.a(x[6]), .b(y[6]), .ci(cmid[5]), .S_D(res[6]), .Co_Bo(cmid[6]));
+FA g8 (.a(x[7]), .b(y[7]), .ci(cmid[6]), .S_D(res[7]), .Co_Bo(cmid[7]));
+endmodule
